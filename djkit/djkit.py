@@ -30,6 +30,7 @@ def init(project):
     dev_requirements = os.path.join(starter_tpl_dir, 'requirements/dev.txt')
     tpl_requirements = os.path.join(starter_tpl_dir, 'requirements')
     tpl_settings = os.path.join(starter_tpl_dir, 'settings')
+    tpl_gitignore = os.path.join(starter_tpl_dir, 'gitignore.example')
     drf_settings = os.path.join(starter_tpl_dir, 'drf_settings.py')
 
     project_current_settings = os.path.join(project_source_dir, 'settings.py')
@@ -52,6 +53,9 @@ def init(project):
 
     # copy settings to project
     subprocess.call(['cp', '-r', tpl_settings, project_settings_dir])
+
+    # copy gitignore to project
+    subprocess.call(['cp', '-r', tpl_gitignore, project_dir])
 
     # append django restframework settings
     subprocess.call(['mv', project_current_settings, project_settings])

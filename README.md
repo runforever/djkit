@@ -13,6 +13,7 @@
 
 ## useage
 `pip install -e git+https://github.com/BurnishTechCN/djkit.git`
+
 `djkit init your-project-name`
 
 ## License
