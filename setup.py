@@ -4,7 +4,7 @@ from setuptools import setup
 
 setup(
     name='djkit',
-    version='0.2',
+    version='0.3',
     description='django starter kit',
     url='https://github.com/BurnishTechCN/djkit',
     author='runforever',

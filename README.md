@@ -11,6 +11,31 @@
 5. [django cors header](https://github.com/ottoyiu/django-cors-headers) 浏览器跨域支持
 6. [Raven](https://github.com/getsentry/raven-python) Sentry Client 异常提示
 
+## 目录结构说明
+```
+story
+|── .gitignore      # Python gitignore
+|── .venv           # virtualenv
+├── manage.py
+├── requirements
+│   ├── base.txt
+│   ├── dev.txt
+│   └── prod.txt
+└── story
+├── __init__.py
+├── admin.py       # 自动加载所有 models 到 django admin
+├── migrations
+│   └── __init__.py
+├── models         # 所有 models 统一放到这个文件夹管理
+│   └── __init__.py
+├── settings       # 生产环境和开发环境 settings 做隔离
+│   ├── __init__.py
+│   ├── local_settings.py.tpl
+│   └── settings.py
+├── urls.py
+    └── wsgi.py
+```
+
 ## usage
 `pip install git+https://github.com/BurnishTechCN/djkit.git`
 

@@ -25,11 +25,12 @@ def init(project):
     project_dir = os.path.join(BASE_DIR, project)
     project_source_dir = os.path.join(project_dir, project)
     project_venv = os.path.join(project_dir, '.venv')
+    project_pip = os.path.join(project_venv, 'bin/pip')
 
     starter_tpl_dir = os.path.join(TMP_DIR, uuid.uuid1().hex)
     dev_requirements = os.path.join(starter_tpl_dir, 'requirements/dev.txt')
     tpl_requirements = os.path.join(starter_tpl_dir, 'requirements')
-    tpl_settings = os.path.join(starter_tpl_dir, 'settings')
+    tpl_source = os.path.join(starter_tpl_dir, 'source')
     tpl_gitignore = os.path.join(starter_tpl_dir, 'gitignore.example')
     drf_settings = os.path.join(starter_tpl_dir, 'drf_settings.py')
 
@@ -43,20 +44,21 @@ def init(project):
 
     # create virtualenv
     subprocess.call(['virtualenv', tmp_venv])
-    subprocess.call([tmp_pip, 'install', '-r', dev_requirements, '-i', 'https://pypi.mirrors.ustc.edu.cn/simple'])
+    subprocess.call([tmp_pip, 'install', 'Django==1.9.10', '-i', 'https://pypi.mirrors.ustc.edu.cn/simple'])
 
     # create django project
     subprocess.call([tmp_django_admin, 'startproject', project])
-    subprocess.call(['mv', tmp_venv, project_venv])
+    subprocess.call(['virtualenv', project_venv])
+    subprocess.call([project_pip, 'install', '-r', dev_requirements, '-i', 'https://pypi.mirrors.ustc.edu.cn/simple'])
 
     # copy requiremnts to project
     subprocess.call(['cp', '-r', tpl_requirements, project])
 
-    # copy settings to project
-    subprocess.call(['cp', '-r', tpl_settings, project_settings_dir])
+    # copy source to project
+    subprocess.call('cp -r {src}/* {dest}'.format(src=tpl_source, dest=project_source_dir), shell=True)
 
     # copy gitignore to project
-    subprocess.call(['cp', '-r', tpl_gitignore, project_gitignore])
+    subprocess.call(['cp', tpl_gitignore, project_gitignore])
 
     # append django restframework settings
     subprocess.call(['mv', project_current_settings, project_settings])
@@ -65,3 +67,4 @@ def init(project):
 
     # rm tmp file
     subprocess.call(['rm', '-rf', starter_tpl_dir])
+    subprocess.call(['rm', '-rf', tmp_venv])
