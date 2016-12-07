@@ -37,7 +37,7 @@ story
 ```
 
 ## usage
-```pip install git+https://github.com/BurnishTechCN/djkit.git```
+`pip install git+https://github.com/runforever/djkit.git`
 
 `djkit init your-project-name`
 
