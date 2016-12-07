@@ -40,11 +40,11 @@ def init(project):
     project_settings = os.path.join(project_settings_dir, 'settings.py')
 
     # clone django starter kit template
-    subprocess.call(['git', 'clone', 'https://github.com/BurnishTechCN/django-starter-template.git', starter_tpl_dir])
+    subprocess.call(['git', 'clone', 'https://github.com/runforever/django-starter-template.git', starter_tpl_dir])
 
     # create virtualenv
     subprocess.call(['virtualenv', tmp_venv])
-    subprocess.call([tmp_pip, 'install', 'Django==1.9.10', '-i', 'https://pypi.mirrors.ustc.edu.cn/simple'])
+    subprocess.call([tmp_pip, 'install', 'Django==1.10.4', '-i', 'https://pypi.mirrors.ustc.edu.cn/simple'])
 
     # create django project
     subprocess.call([tmp_django_admin, 'startproject', project])
